@@ -8,6 +8,6 @@ Via Postmann (https://www.postman.com/downloads/) könnt ihr die Schnittstelle t
 
 # Frontend
 Via "cd frontend" navigiert Ihr in den frontend Ordner.
-Dort startet Ihr das Frontend via "ng serve".s
+Dort startet Ihr das Frontend via "ng serve".
 
 Vorrausgesetzt ist, dass Ihr den Setup Guide abgearbeitet habt.
