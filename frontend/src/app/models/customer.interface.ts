@@ -1,3 +1,6 @@
+import { Gender } from "../enums/gender.enum";
+import { martialStatus } from "../enums/martialStatus.enum";
+
 export interface Customer {
     firstName: string;
     lastName: string;
@@ -5,6 +8,6 @@ export interface Customer {
     street: string;
     houseNumber: string;
     hasChildren: boolean;
-    //maritalStatus: instant
-    //gender: enum
+    gender: Gender;
+    martialStatur: martialStatus;
   }
