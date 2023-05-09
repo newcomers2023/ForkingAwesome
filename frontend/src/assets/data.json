@@ -1,0 +1,22 @@
+[
+    {
+      "accountNumber": "DE89 3704 0044 0532 0130 00",
+      "accountName": "Persönliches Konto",
+      "balance": 1000
+    },
+    {
+      "accountNumber": "DE75512108001245126199",
+      "accountName": "maxblue Depotkonto",
+      "balance": 2000
+    },
+    {
+      "accountNumber": "DE89 3704 0044 0532 0130 00",
+      "accountName": "AktivKonto",
+      "balance": 1000
+    },
+    {
+      "accountNumber": "DE75512108001245126199",
+      "accountName": "Depot Verrechnungskonto",
+      "balance": 2000
+    }
+  ]

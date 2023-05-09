@@ -17,7 +17,7 @@ export class AccountsOverviewComponent implements OnInit {
   }
 
   getAccounts() {
-    this.http.get<Account[]>('http://localhost:3000/bank-accounts').subscribe(data => {
+    this.http.get<Account[]>('assets/data.json').subscribe(data => {
       this.accounts = data;
     });
   }
