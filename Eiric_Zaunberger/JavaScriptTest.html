@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+   <html>
+    <head>
+        <title>Formular</title>
+        <link rel="stylesheet" href="stylesheet.css" >
+    </head>
+
+    <body>
+        <h1>Formular</h1>
+        <input id="inputField" type="text" placeholder="Eingeben">
+        <button type="button" onclick="checkinput()" >Eingabe</button>
+        <p id="result" ></p>
+        
+        <script>
+            function checkinput(){
+                var input=document.getElementById("inputField").value;
+                var result=document.getElementById("result");
+                
+
+                if (input.length>5){
+                 result.textContent = "Erfolg: Der Text ist lang genug"; 
+                }else{
+                 result.textContent = "Leider zu kurz";
+                }
+            }    
+
+
+
+        </script>
+
+    </body>
+
+
+
+    </html>
