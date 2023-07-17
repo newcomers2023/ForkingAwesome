@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snake</title>
+    <style>
+        #game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #snake-game canvas {
+            border: 1px solid black;
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="snake-game">
+    <canvas id="game-canvas" width="400" height="400"></canvas>
+    <button onclick="goToMainPage()">Back to Main Page</button>
+</div>
+
+<script>
+        // Snake-Spiellogik
+
+        var canvas = document.getElementById("game-canvas");
+        var ctx = canvas.getContext("2d");
+        var gridSize = 20;
+        var gridWidth = canvas.width / gridSize;
+        var gridHeight = canvas.height / gridSize;
+        var snake = createSnake();
+        var food = createFood();
+        var direction = "right";
+        var gameLoop;
+
+        function createSnake() {
+            return {
+                body: [
+                    { x: 5, y: 5 },
+                    { x: 4, y: 5 },
+                    { x: 3, y: 5 }
+                ],
+                direction: "right"
+            };
+        }
+
+        function createFood() {
+            return {
+                x: Math.floor(Math.random() * gridWidth),
+                y: Math.floor(Math.random() * gridHeight)
+            };
+        }
+
+        function draw() {
+            // Hintergrund zeichnen
+            ctx.fillStyle = "lightgray";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Schlange zeichnen
+            ctx.fillStyle = "green";
+            snake.body.forEach(segment => {
+                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
+            });
+
+            // Essen zeichnen
+            ctx.fillStyle = "red";
+            ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+        }
+
+        function update() {
+            // Schlange aktualisieren
+            var head = Object.assign({}, snake.body[0]);
+            switch (direction) {
+                case "up":
+                    head.y--;
+                    break;
+                case "down":
+                    head.y++;
+                    break;
+                case "left":
+                    head.x--;
+                    break;
+                case "right":
+                    head.x++;
+                    break;
+            }
+            snake.body.unshift(head);
+
+            // Prüfen, ob die Schlange das Essen frisst
+            if (head.x === food.x && head.y === food.y) {
+                food = createFood();
+            } else {
+                snake.body.pop();
+            }
+
+            // Prüfen, ob die Schlange kollidiert
+            if (head.x < 0 || head.x >= gridWidth || head.y < 0 || head.y >= gridHeight) {
+                gameOver();
+                return;
+            }
+            for (var i = 1; i < snake.body.length; i++) {
+                if (snake.body[i].x === head.x && snake.body[i].y === head.y) {
+                    gameOver();
+                    return;
+                }
+            }
+        }
+
+        function startGame() {
+            gameLoop = setInterval(function () {
+                update();
+                draw();
+            }, 100);
+        }
+
+        function gameOver() {
+            clearInterval(gameLoop);
+            alert("Game Over!");
+            resetGame();
+        }
+
+        function resetGame() {
+            snake = createSnake();
+            food = createFood();
+            direction = "right";
+            startGame();
+        }
+
+        function goToMainPage() {
+            window.location.href = "MainPage.html";
+        }
+
+        // Steuerung mit den Pfeiltasten
+        document.addEventListener("keydown", function (event) {
+            switch (event.key) {
+                case "ArrowUp":
+                    if (direction !== "down") {
+                        direction = "up";
+                    }
+                    break;
+                case "ArrowDown":
+                    if (direction !== "up") {
+                        direction = "down";
+                    }
+                    break;
+                case "ArrowLeft":
+                    if (direction !== "right") {
+                        direction = "left";
+                    }
+                    break;
+                case "ArrowRight":
+                    if (direction !== "left") {
+                        direction = "right";
+                    }
+                    break;
+            }
+        });
+
+        // Spiel starten
+        startGame();
+    </script>
+</body>
+</html>

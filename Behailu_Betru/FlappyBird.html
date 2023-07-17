@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flappy Bird</title>
+  <style>
+        #game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #flappy-bird-game canvas {
+            border: 1px solid black;
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="flappy-bird-game">
+  <canvas id="game-canvas" width="400" height="400"></canvas>
+  <button onclick="goToMainPage()">Back to Main Page</button>
+</div>
+
+<script>
+        // Flappy Bird-Spiellogik
+
+        var canvas = document.getElementById("game-canvas");
+        var ctx = canvas.getContext("2d");
+        var birdSize = 30;
+        var birdX = canvas.width / 3;
+        var birdY = canvas.height / 2;
+        var gravity = 1;
+        var jumpForce = 20;
+        var pipes = [];
+        var gameLoop;
+        var gameEnded = false;
+
+        function drawBird() {
+            ctx.fillStyle = "yellow";
+            ctx.fillRect(birdX, birdY, birdSize, birdSize);
+        }
+
+        function drawPipes() {
+            ctx.fillStyle = "green";
+            pipes.forEach(function (pipe) {
+                ctx.fillRect(pipe.x, 0, pipe.width, pipe.heightTop);
+                ctx.fillRect(pipe.x, pipe.yBottom, pipe.width, canvas.height - pipe.heightTop - pipe.space);
+            });
+        }
+
+        function updateBird() {
+            birdY += gravity;
+
+            if (birdY <= 0 || birdY + birdSize >= canvas.height) {
+                endGame();
+            }
+        }
+
+        function updatePipes() {
+            pipes.forEach(function (pipe) {
+                pipe.x -= 2;
+
+                if (pipe.x + pipe.width <= 0) {
+                    pipes.shift();
+                }
+
+                if (
+                    birdX + birdSize >= pipe.x && birdX <= pipe.x + pipe.width &&
+                    (birdY <= pipe.heightTop || birdY + birdSize >= pipe.yBottom)
+                ) {
+                    endGame();
+                }
+            });
+
+            if (pipes.length === 0 || canvas.width - pipes[pipes.length - 1].x >= 200) {
+                createPipe();
+            }
+        }
+
+        function createPipe() {
+            var pipeHeightTop = Math.random() * (canvas.height / 2);
+            var pipe = {
+                x: canvas.width,
+                heightTop: pipeHeightTop,
+                yBottom: pipeHeightTop + 150,
+                width: 50,
+                space: 100
+            };
+            pipes.push(pipe);
+        }
+
+        function jump() {
+            birdY -= jumpForce;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawBird();
+            drawPipes();
+        }
+
+        function update() {
+            if (gameEnded) {
+                return;
+            }
+
+            updateBird();
+            updatePipes();
+        }
+
+        function startGame() {
+            gameLoop = setInterval(function () {
+                update();
+                draw();
+            }, 1000 / 60);
+        }
+
+        function endGame() {
+            clearInterval(gameLoop);
+            gameEnded = true;
+            alert("Game Over!");
+            resetGame();
+        }
+
+        function resetGame() {
+            birdX = canvas.width / 3;
+            birdY = canvas.height / 2;
+            pipes = [];
+            gameEnded = false;
+            startGame();
+        }
+
+        function goToMainPage() {
+            window.location.href = "MainPage.html";
+        }
+
+        // Tastatursteuerung mit der Leertaste
+        document.addEventListener("keydown", function (event) {
+            if (event.key === " ") {
+                jump();
+            }
+        });
+
+        // Spiel starten
+        startGame();
+    </script>
+</body>
+</html>

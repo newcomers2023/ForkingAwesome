@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minispiele</title>
+  <style>
+        /* CSS-Styling für die Spielicons */
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .game-tile {
+            width: 200px;
+            height: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .game-tile:hover {
+            transform: scale(1.05);
+        }
+
+        .game-tile img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .game-tile h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .game-tile p {
+            font-size: 14px;
+            color: #777;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Minispiele</h1>
+<div id="game-container">
+  <div class="game-tile" onclick="startHangman()">
+    <img src="https://th.bing.com/th/id/R.33256eaf023b7490063838b953414b2c?rik=H0ln1i3bfshbGQ&riu=http%3a%2f%2fsteve-lovelace.com%2fwordpress%2fwp-content%2fuploads%2f2013%2f09%2fhangman-figure.png&ehk=JUzhOWn4q%2faYCvGWExcNBW2rev6hAMpIzvqVWJj2U1U%3d&risl=&pid=ImgRaw&r=0" alt="Hangman">
+    <h2>Hangman</h2>
+    <p>Errate das Wort, bevor der Mann gehaengt wird!</p>
+  </div>
+  <div class="game-tile" onclick="startSnake()">
+    <img src="https://th.bing.com/th/id/R.25630e0a5fb89ea941d33d2e2f88e7c4?rik=JKu4WiftbtoiTg&pid=ImgRaw&r=0" alt="Snake">
+    <h2>Snake</h2>
+    <p>Steure die Schlange und sammle das Futter ein!</p>
+  </div>
+  <div class="game-tile" onclick="startPong()">
+    <img src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photo/8930877/image/5f32ccf149d5ed5b318594889af41bdc" alt="Pong">
+    <h2>Pong</h2>
+    <p>Schlage den Ball mit deinem Schlaeger zurueck!</p>
+  </div>
+  <div class="game-tile" onclick="startTicTacToe()">
+    <img src="https://th.bing.com/th/id/OIP.wS5uDdEDnQJSkWZSLgVq1QHaFo?w=221&h=180&c=7&r=0&o=5&pid=1.7" alt="Tic-Tac-Toe">
+    <h2>Tic-Tac-Toe</h2>
+    <p>Spiele das klassische Tic-Tac-Toe-Spiel!</p>
+  </div>
+  <div class="game-tile" onclick="startFlappyBird()">
+    <img src="https://th.bing.com/th/id/OIP.UC9jDQ4BJgyKvUi7y_d0DAHaHa?w=185&h=185&c=7&r=0&o=5&pid=1.7" alt="Flappy Bird">
+    <h2>Flappy Bird</h2>
+    <p>Weiche den Rohren aus und fliege so weit wie moeglich!</p>
+  </div>
+  <div class="game-tile" onclick="startFruitNinja()">
+    <img src="https://th.bing.com/th/id/OIP.ODUFOjXDBVug8X_PhPRYpAHaHa?w=157&h=180&c=7&r=0&o=5&pid=1.7" alt="Fruit Ninja">
+    <h2>Fruit Ninja</h2>
+    <p>Zerstoere die Fruechte, vermeide die Bomben!</p>
+  </div>
+</div>
+
+<script>
+ function startHangman() {
+            window.location.href = "Hangman.html";
+        }
+
+        function startSnake() {
+           window.location.href = "Snake.html";
+        }
+        function startPong() {
+           window.location.href = "Pong.html";
+        }
+        function startTicTacToe() {
+            window.location.href = "TicTacToe.html";
+        }
+
+        function startFlappyBird() {
+            window.location.href = "FlappyBird.html";
+        }
+
+        function startWordSearch() {
+            window.location.href = "WordSearch.html";
+        }
+
+        function startFruitNinja() {
+            window.location.href = "FruitNinja.html";
+        }
+
+        function start2048() {
+            window.location.href = "2048.html";
+        }
+
+
+        function startTowerDefense() {
+            window.location.href = "TowerDefense.html";
+        }
+
+</script>
+</body>
+</html>

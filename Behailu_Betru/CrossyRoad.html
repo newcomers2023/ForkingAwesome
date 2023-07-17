@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crossy Road</title>
+  <style>
+        #game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #crossy-road-game {
+            font-family: Arial, sans-serif;
+        }
+
+        .game-canvas {
+            border: 1px solid black;
+            background-color: #a8a8a8;
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="game-container">
+  <div id="crossy-road-game">
+    <h1>Crossy Road</h1>
+    <canvas id="game-canvas" width="800" height="600"></canvas>
+    <button onclick="goToMainPage()">Back to Main Page</button>
+  </div>
+</div>
+
+<script>
+        // Crossy Road-Spiellogik
+
+        var canvas = document.getElementById("game-canvas");
+        var ctx = canvas.getContext("2d");
+        var player = { x: 375, y: 550, width: 50, height: 50 };
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "green";
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function movePlayer(keyCode) {
+            switch (keyCode) {
+                case 37: // Left arrow key
+                    if (player.x > 0) {
+                        player.x -= 50;
+                    }
+                    break;
+                case 39: // Right arrow key
+                    if (player.x < canvas.width - player.width) {
+                        player.x += 50;
+                    }
+                    break;
+                case 38: // Up arrow key
+                    if (player.y > 0) {
+                        player.y -= 50;
+                    }
+                    break;
+                case 40: // Down arrow key
+                    if (player.y < canvas.height - player.height) {
+                        player.y += 50;
+                    }
+                    break;
+            }
+
+            draw();
+        }
+
+        function goToMainPage() {
+            window.location.href = "MainPage.html";
+        }
+
+        document.addEventListener("keydown", function (event) {
+            movePlayer(event.keyCode);
+        });
+
+        draw();
+    </script>
+</body>
+</html>

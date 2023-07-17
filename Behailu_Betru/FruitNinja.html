@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fruit Ninja</title>
+  <style>
+        #game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #fruit-ninja-game canvas {
+            border: 1px solid black;
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="fruit-ninja-game">
+  <canvas id="game-canvas" width="800" height="400"></canvas>
+  <button onclick="goToMainPage()">Back to Main Page</button>
+</div>
+
+<script>
+        // Fruit Ninja-Spiellogik
+
+        var canvas = document.getElementById("game-canvas");
+        var ctx = canvas.getContext("2d");
+        var fruits = [];
+        var score = 0;
+        var gameLoop;
+
+        function createFruit() {
+            var fruit = {
+                x: Math.random() * (canvas.width - 100) + 50,
+                y: canvas.height,
+                dy: -Math.random() * 2 - 2,
+                radius: 30,
+                color: getRandomColor()
+            };
+            fruits.push(fruit);
+        }
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (var i = 0; i < fruits.length; i++) {
+                var fruit = fruits[i];
+                ctx.beginPath();
+                ctx.arc(fruit.x, fruit.y, fruit.radius, 0, Math.PI * 2);
+                ctx.fillStyle = fruit.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            ctx.font = "24px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("Score: " + score, 10, 30);
+        }
+
+        function update() {
+            for (var i = 0; i < fruits.length; i++) {
+                var fruit = fruits[i];
+                fruit.y += fruit.dy;
+
+                if (fruit.y + fruit.radius < 0) {
+                    fruits.splice(i, 1);
+                }
+            }
+        }
+
+        function startGame() {
+            gameLoop = setInterval(function () {
+                update();
+                draw();
+            }, 10);
+
+            setInterval(function () {
+                createFruit();
+            }, 1000);
+        }
+
+        function goToMainPage() {
+            window.location.href = "MainPage.html";
+        }
+
+        canvas.addEventListener("click", function (event) {
+            var rect = canvas.getBoundingClientRect();
+            var x = event.clientX - rect.left;
+            var y = event.clientY - rect.top;
+
+            for (var i = 0; i < fruits.length; i++) {
+                var fruit = fruits[i];
+                var dx = x - fruit.x;
+                var dy = y - fruit.y;
+                var distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < fruit.radius) {
+                    fruits.splice(i, 1);
+                    score += 10;
+                    break;
+                }
+            }
+        });
+
+        startGame();
+    </script>
+</body>
+</html>

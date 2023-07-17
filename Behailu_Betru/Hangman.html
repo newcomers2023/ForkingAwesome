@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman</title>
+</head>
+<body>
+<h1>Hangman</h1>
+<div id="hangman-container">
+    <div id="word-display"></div>
+    <div id="guesses-left">Guesses left: <span id="guesses"></span></div>
+    <div id="letters">
+        <button class="letter" onclick="guessLetter('A')">A</button>
+        <button class="letter" onclick="guessLetter('B')">B</button>
+        <button class="letter" onclick="guessLetter('C')">C</button>
+        <button class="letter" onclick="guessLetter('D')">D</button>
+        <button class="letter" onclick="guessLetter('E')">E</button>
+        <button class="letter" onclick="guessLetter('F')">F</button>
+        <button class="letter" onclick="guessLetter('G')">G</button>
+        <button class="letter" onclick="guessLetter('H')">H</button>
+        <button class="letter" onclick="guessLetter('I')">I</button>
+        <button class="letter" onclick="guessLetter('J')">J</button>
+        <button class="letter" onclick="guessLetter('K')">K</button>
+        <button class="letter" onclick="guessLetter('L')">L</button>
+        <button class="letter" onclick="guessLetter('M')">M</button>
+        <button class="letter" onclick="guessLetter('N')">N</button>
+        <button class="letter" onclick="guessLetter('O')">O</button>
+        <button class="letter" onclick="guessLetter('P')">P</button>
+        <button class="letter" onclick="guessLetter('Q')">Q</button>
+        <button class="letter" onclick="guessLetter('R')">R</button>
+        <button class="letter" onclick="guessLetter('S')">S</button>
+        <button class="letter" onclick="guessLetter('T')">T</button>
+        <button class="letter" onclick="guessLetter('U')">U</button>
+        <button class="letter" onclick="guessLetter('V')">V</button>
+        <button class="letter" onclick="guessLetter('W')">W</button>
+        <button class="letter" onclick="guessLetter('X')">X</button>
+        <button class="letter" onclick="guessLetter('Y')">Y</button>
+        <button class="letter" onclick="guessLetter('Z')">Z</button>
+    </div>
+    <button onclick="goToMainPage()">Back to Main Page</button>
+</div>
+
+<script>
+        // Hangman-Spiellogik
+
+        var word = "HANGMAN"; // Das zu erratende Wort
+        var guesses = 6; // Anzahl der verbleibenden Versuche
+        var guessedLetters = []; // Array für geratene Buchstaben
+
+        function initializeGame() {
+            // Initialisiere das Spiel
+            updateWordDisplay();
+            updateGuesses();
+        }
+
+        function updateWordDisplay() {
+            // Aktualisiere die Anzeige des zu erratenden Wortes
+            var wordDisplay = document.getElementById("word-display");
+            var displayText = "";
+            for (var i = 0; i < word.length; i++) {
+                if (guessedLetters.includes(word[i])) {
+                    displayText += word[i] + " ";
+                } else {
+                    displayText += "_ ";
+                }
+            }
+            wordDisplay.textContent = displayText;
+        }
+
+        function updateGuesses() {
+            // Aktualisiere die verbleibenden Versuche
+            var guessesLeft = document.getElementById("guesses");
+            guessesLeft.textContent = guesses;
+        }
+
+        function guessLetter(letter) {
+            // Buchstabe raten
+            if (guesses > 0 && !guessedLetters.includes(letter)) {
+                guessedLetters.push(letter);
+                if (!word.includes(letter)) {
+                    guesses--;
+                }
+                updateWordDisplay();
+                updateGuesses();
+                checkGameStatus();
+            }
+        }
+
+        function checkGameStatus() {
+            // Überprüfe den Spielstatus
+            if (guesses === 0) {
+                alert("Game Over! The word was: " + word);
+                resetGame();
+            } else if (!document.getElementById("word-display").textContent.includes("_")) {
+                alert("Congratulations! You won!");
+                resetGame();
+            }
+        }
+
+        function resetGame() {
+            // Setze das Spiel zurück
+            guessedLetters = [];
+            guesses = 6;
+            updateWordDisplay();
+            updateGuesses();
+        }
+
+        function goToMainPage() {
+            // Zurück zur Hauptseite navigieren
+            window.location.href = "MainPage.html";
+        }
+
+        // Spiel initialisieren
+        initializeGame();
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pong</title>
+  <style>
+        #game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #pong-game canvas {
+            border: 1px solid black;
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="pong-game">
+  <canvas id="game-canvas" width="800" height="400"></canvas>
+  <button onclick="goToMainPage()">Back to Main Page</button>
+</div>
+
+<script>
+        // Pong-Spiellogik
+
+        var canvas = document.getElementById("game-canvas");
+        var ctx = canvas.getContext("2d");
+        var paddleWidth = 10;
+        var paddleHeight = 80;
+        var paddleOffset = 10;
+        var paddleSpeed = 5;
+        var ballSize = 10;
+        var ballSpeed = 2;
+        var ball = { x: canvas.width / 2, y: canvas.height / 2, dx: ballSpeed, dy: ballSpeed };
+        var leftPaddle = { x: paddleOffset, y: canvas.height / 2 - paddleHeight / 2 };
+        var rightPaddle = { x: canvas.width - paddleOffset - paddleWidth, y: canvas.height / 2 - paddleHeight / 2 };
+        var leftPaddleUpPressed = false;
+        var leftPaddleDownPressed = false;
+        var rightPaddleUpPressed = false;
+        var rightPaddleDownPressed = false;
+        var gameLoop;
+
+        function draw() {
+            // Spielfeld zeichnen
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Linie in der Mitte zeichnen
+            ctx.fillStyle = "white";
+            ctx.fillRect(canvas.width / 2 - 2, 0, 4, canvas.height);
+
+            // Bälle zeichnen
+            ctx.fillStyle = "white";
+            ctx.fillRect(ball.x - ballSize / 2, ball.y - ballSize / 2, ballSize, ballSize);
+
+            // Paddles zeichnen
+            ctx.fillStyle = "white";
+            ctx.fillRect(leftPaddle.x, leftPaddle.y, paddleWidth, paddleHeight);
+            ctx.fillRect(rightPaddle.x, rightPaddle.y, paddleWidth, paddleHeight);
+        }
+
+        function update() {
+            // Ball bewegen
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            // Kollision mit den Paddles überprüfen
+            if (ball.y + ballSize / 2 >= leftPaddle.y && ball.y - ballSize / 2 <= leftPaddle.y + paddleHeight && ball.dx < 0) {
+                if (ball.x - ballSize / 2 <= leftPaddle.x + paddleWidth) {
+                    ball.dx = -ball.dx;
+                }
+            }
+            if (ball.y + ballSize / 2 >= rightPaddle.y && ball.y - ballSize / 2 <= rightPaddle.y + paddleHeight && ball.dx > 0) {
+                if (ball.x + ballSize / 2 >= rightPaddle.x) {
+                    ball.dx = -ball.dx;
+                }
+            }
+
+            // Kollision mit den Spielfeldrändern überprüfen
+            if (ball.y - ballSize / 2 <= 0 || ball.y + ballSize / 2 >= canvas.height) {
+                ball.dy = -ball.dy;
+            }
+
+            // Paddle-Bewegung
+            if (leftPaddleUpPressed && leftPaddle.y > 0) {
+                leftPaddle.y -= paddleSpeed;
+            }
+            if (leftPaddleDownPressed && leftPaddle.y + paddleHeight < canvas.height) {
+                leftPaddle.y += paddleSpeed;
+            }
+            if (rightPaddleUpPressed && rightPaddle.y > 0) {
+                rightPaddle.y -= paddleSpeed;
+            }
+            if (rightPaddleDownPressed && rightPaddle.y + paddleHeight < canvas.height) {
+                rightPaddle.y += paddleSpeed;
+            }
+
+            // Spiel gewonnen überprüfen
+            if (ball.x - ballSize / 2 <= 0 || ball.x + ballSize / 2 >= canvas.width) {
+                gameOver();
+                return;
+            }
+        }
+
+        function startGame() {
+            gameLoop = setInterval(function () {
+                update();
+                draw();
+            }, 10);
+        }
+
+        function gameOver() {
+            clearInterval(gameLoop);
+            alert("Game Over!");
+            resetGame();
+        }
+
+        function resetGame() {
+            ball = { x: canvas.width / 2, y: canvas.height / 2, dx: ballSpeed, dy: ballSpeed };
+            leftPaddle = { x: paddleOffset, y: canvas.height / 2 - paddleHeight / 2 };
+            rightPaddle = { x: canvas.width - paddleOffset - paddleWidth, y: canvas.height / 2 - paddleHeight / 2 };
+            startGame();
+        }
+
+        function goToMainPage() {
+            window.location.href = "MainPage.html";
+        }
+
+        // Paddle-Steuerung mit den Tasten W, S, Pfeiltaste hoch, Pfeiltaste runter
+        document.addEventListener("keydown", function (event) {
+            switch (event.key) {
+                case "w":
+                    leftPaddleUpPressed = true;
+                    break;
+                case "s":
+                    leftPaddleDownPressed = true;
+                    break;
+                case "ArrowUp":
+                    rightPaddleUpPressed = true;
+                    break;
+                case "ArrowDown":
+                    rightPaddleDownPressed = true;
+                    break;
+            }
+        });
+
+        document.addEventListener("keyup", function (event) {
+            switch (event.key) {
+                case "w":
+                    leftPaddleUpPressed = false;
+                    break;
+                case "s":
+                    leftPaddleDownPressed = false;
+                    break;
+                case "ArrowUp":
+                    rightPaddleUpPressed = false;
+                    break;
+                case "ArrowDown":
+                    rightPaddleDownPressed = false;
+                    break;
+            }
+        });
+
+        // Spiel starten
+        startGame();
+    </script>
+</body>
+</html>
+
