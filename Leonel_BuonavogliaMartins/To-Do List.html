@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do-Liste</title>
+</head>
+<body>
+  <h2>To-Do-Liste</h2>
+
+  <label for="taskInput">Neue Aufgabe:</label>
+  <input type="text" id="taskInput">
+  <button onclick="addTask()">Hinzufügen</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    var tasks = [];
+
+    function addTask() {
+      var taskInput = document.getElementById("taskInput");
+      var taskList = document.getElementById("taskList");
+
+      var taskText = taskInput.value.trim();
+
+      if (taskText !== "") {
+        var task = {
+          text: taskText,
+          done: false
+        };
+
+        tasks.push(task);
+        taskInput.value = "";
+
+        updateTaskList();
+      }
+    }
+
+    function updateTaskList() {
+      var taskList = document.getElementById("taskList");
+      taskList.innerHTML = "";
+
+      for (var i = 0; i < tasks.length; i++) {
+        var task = tasks[i];
+
+        var li = document.createElement("li");
+
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.done;
+        checkbox.setAttribute("onchange", "toggleTaskStatus(" + i + ")");
+
+        var span = document.createElement("span");
+        span.innerText = task.text;
+
+        var editButton = document.createElement("button");
+        editButton.innerText = "Bearbeiten";
+        editButton.setAttribute("onclick", "editTask(" + i + ")");
+
+        var deleteButton = document.createElement("button");
+        deleteButton.innerText = "Löschen";
+        deleteButton.setAttribute("onclick", "deleteTask(" + i + ")");
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(editButton);
+        li.appendChild(deleteButton);
+
+        taskList.appendChild(li);
+      }
+    }
+
+    function toggleTaskStatus(index) {
+      tasks[index].done = !tasks[index].done;
+      updateTaskList();
+    }
+
+    function editTask(index) {
+      var newText = prompt("Neuer Text:", tasks[index].text);
+
+      if (newText !== null) {
+        tasks[index].text = newText.trim();
+        updateTaskList();
+      }
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      updateTaskList();
+    }
+  </script>
+</body>
+</html>
