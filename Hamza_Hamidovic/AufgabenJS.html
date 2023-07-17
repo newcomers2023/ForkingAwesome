@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="AufgabenJS.inc.js"></script>
+    <link rel="stylesheet" href="rechner.css">
+</head>
+<body>
+    <div>
+        <h1>Ändere den Text, indem du auf den Knopf klickst</h1>
+        <p id="changeText">Du kannst diesen Text hier ändern.</p>
+        <button onclick="Change()">Ändern!</button>
+    </div>
+    
+    <div>
+        <form action="">
+            <h1>Gib deinen Namen ein</h1>
+            <h3>Der Name muss länger als 5 Zeichen sein</h3>
+            <input type="text" placeholder="Name" name="name" id="name">
+
+            <input type="submit" value="Submit" onclick="Verify()">
+        </form>
+    </div>
+
+    <div>
+        <h1>Taschenrechner</h1>
+        <input type="number" name="num1" id="num1">
+        <input type="number" name="num2" id="num2">
+
+        <select name="sel" id="select">
+            <option value="addition">+</option>
+            <option value="subtraktion">-</option>
+            <option value="multiplikation">*</option>
+            <option value="division">/</option>
+        </select>
+        
+        <button onclick="Calc()">berechnen</button>
+
+        <br>
+
+        <h3>Ergebnis:</h3> <h3 id="val"></h3>
+    </div>
+
+    <div>
+        <h1>meine To-Do-Liste</h1>
+        
+        <input type="text" id="text">
+        <button onclick="add()">Submit</button>
+
+        <ul id="list"> </ul>
+    </div>
+</body>
+</html>
