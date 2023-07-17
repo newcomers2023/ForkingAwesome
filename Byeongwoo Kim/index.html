@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<head>
+<title>Hallo 9000</title>
+<script src="code.js"></script>
+<script src="style.css"></script>
+</head>
+<body>
+    <p id = "modtxt">Aiya earendil elenion ancalima</p>
+    <button onclick = "mod()">Do not press this button</button>
+    <hr/>
+    <form>
+        <label for = "rnd">Random text</label>
+        <input type = "text" id = "text">
+        <input type = "submit" value = "Hier drücken" onclick="len()">
+    </form>
+    <hr/>
+    <p>Taschenrechner hier unten</p>
+        <label>Operand 1:</label>
+        <input type = "text" id = "opa">
+        <br/>
+        <label>Operand 2:</label>
+        <input type = "text" id = "opb">
+        <br/>
+        <button onclick = "add()">+</button>
+        <button onclick = "sub()">-</button>
+        <button onclick = "mul()">x</button>
+        <button onclick = "div()">/</button>
+    <p>Ergebnis:<p id = "ans">---</p></p>
+
+    <p>Anderer Taschenrechner</p>
+    <p id = num>[0]</p>
+    <br/>
+    <button onclick = "num('0')">0</button>
+    <button onclick = "num('1')">1</button>
+    <button onclick = "num('2')">2</button>
+    <button onclick = "num('3')">3</button>
+    <button onclick = "num('4')">4</button>
+    <button onclick = "num('5')">5</button>
+    <button onclick = "num('6')">6</button>
+    <button onclick = "num('7')">7</button>
+    <button onclick = "num('8')">8</button>
+    <button onclick = "num('9')">9</button>
+    <br/>
+    <button onclick = "operflg(1)">+</button>
+    <button onclick = "operflg(2)">-</button>
+    <button onclick = "operflg(3)">x</button>
+    <button onclick = "operflg(4)">/</button>
+    <br/>
+    <button onclick = "calc()">calculate!</button>
+    <button onclick = "rst()">Reset</button>
+    <div id = "tdl">
+        <p>To-Do Liste</p>
+    </div>
+
+    <p>
+        <a href = "https://tarelenion.github.io/"><img src = "https://tarelenion.github.io/uploadedfiles/Emblem.gif" width = 300px></a>
+        <ul>
+            <li>The Rock - Sean Connery</li>
+            <li>Hacksaw Ridge - ???</li>
+            <li>I am Mother - ???</li>
+        </ul>
+        <form>
+            <label for = "name">Name:</label>
+            <input type = "text" required>
+            <label for = "email">E-mail:</label>
+            <input type = "text" required>
+            <label for = "msg">Nachricht:</label>
+            <textarea name = "msg">
+        </form>
+    </p>
+</body>
+</HTML>
