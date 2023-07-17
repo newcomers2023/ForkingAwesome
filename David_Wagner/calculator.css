@@ -1,0 +1,14 @@
+body{
+    background-color: rgb(39, 70, 59);
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item{
+    padding: 10px;
+}
+.itemR{
+    justify-content: left;
+}

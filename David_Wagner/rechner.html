@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript-Rechner</title>
+  <link rel = "stylesheet" href="calculator.css">
+</head>
+<body>
+<div class="container">
+   <div class="item"><input type="number" id="num1" placeholder="Zahl 1"></div>
+   <div class="item"><input type="number" id="num2" placeholder="Zahl 2"></div>
+   <div class="item"></div> <button onclick="calculate()">Berechnen</button></div>
+   <div class="itemR"> <p id="result"></p></div>
+  <script>
+    function calculate() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+
+      var sum = num1 + num2;
+      var difference = num1 - num2;
+      var product = num1 * num2;
+      var quotient = num1 / num2;
+    
+
+      document.getElementById("result").innerHTML = "Summe: " + sum + "<br>"
+        + "Differenz: " + difference + "<br>"
+        + "Produkt: " + product + "<br>"
+        + "Quotient: " + quotient;
+    }
+  </script>
+  </div>
+</body>
+</html>
