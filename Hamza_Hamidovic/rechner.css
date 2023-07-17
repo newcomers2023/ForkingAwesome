@@ -1,0 +1,30 @@
+#rechner{
+    width: 25%;
+    display: grid;
+    grid-template: 
+    "a b c"
+    "d e f"
+    "g h i"
+    "j j j"
+    ;
+}
+
+/**
+<div>
+        <h1>Taschenrechenr</h1>
+        <div id="rechner">
+            <button class="a">1</button>
+            <button class="b">2</button>
+            <button class="c">3</button>
+
+            <button class="d">4</button>
+            <button class="e">5</button>
+            <button class="f">6</button>
+
+            <button class="g">7</button>
+            <button class="h">8</button>
+            <button class="i">9</button>
+
+            <button class="j">0</button>
+        </div>
+    </div>
